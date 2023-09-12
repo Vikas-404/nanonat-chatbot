@@ -10,6 +10,7 @@ import (
 	"fmt"
 	"strings"
 	"os"
+	"log"
 
 	//this is the open ai that is use to make a request
 	openai "github.com/sashabaranov/go-openai"
@@ -33,7 +34,7 @@ func ToText(inputText string) string {
 		log.Fatal("Error loading .env file")
 	}
 
-	apiKey := os.Getenv(“API_KEY”)
+	apiKey := os.Getenv("API_KEY")
 	client := openai.NewClient(apiKey)
 	// saving previous chat to recent chat to remember the chat
 	chatHistory = append(chatHistory, openai.ChatCompletionMessage{
