@@ -9,7 +9,7 @@ import (
 	"context"
 	"fmt"
 	"strings"
-	“os"
+	"os"
 
 	//this is the open ai that is use to make a request
 	openai "github.com/sashabaranov/go-openai"
