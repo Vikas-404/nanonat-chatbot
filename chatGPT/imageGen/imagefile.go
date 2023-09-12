@@ -9,16 +9,24 @@ import (
 	"os"
 
 	openai "github.com/sashabaranov/go-openai"
+	"github.com/joho/godotenv"
+
 )
 
 // ImageRequest takes in a string as an argument and returns a string as a response.
 // It creates an image using OpenAI's GPT-3 API, saves the image to a file,
 // and returns a success message.
+
 func ImageRequest(imageDef string) string {
-	API_KEY := "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"
+	err := godotenv.Load(".env")
+    if err != nil {
+        log.Fatal("Error loading .env file")
+    }
+
+    apiKey := os.Getenv(“API_KEY”)
 
 	// Create a new client for the OpenAI API using the API key
-	client := openai.NewClient(API_KEY)
+	client := openai.NewClient(apiKey)
 
 	// Create a context for the API requests
 	ctx := context.Background()
