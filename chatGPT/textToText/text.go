@@ -9,9 +9,13 @@ import (
 	"context"
 	"fmt"
 	"strings"
+	“os"
 
 	//this is the open ai that is use to make a request
 	openai "github.com/sashabaranov/go-openai"
+	"github.com/joho/godotenv"
+	
+
 )
 
 // the variable below is used to store previous messages so that it can rememeber previous chat
@@ -23,8 +27,14 @@ var chatHistory []openai.ChatCompletionMessage
 func ToText(inputText string) string {
 	// You can find your API key at https://platform.openai.com/account/api-keys
 
-	API_KEY := "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"
-	client := openai.NewClient(API_KEY)
+	
+	err := godotenv.Load(".env")
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
+	apiKey := os.Getenv(“API_KEY”)
+	client := openai.NewClient(apiKey)
 	// saving previous chat to recent chat to remember the chat
 	chatHistory = append(chatHistory, openai.ChatCompletionMessage{
 		Role:    openai.ChatMessageRoleUser,
