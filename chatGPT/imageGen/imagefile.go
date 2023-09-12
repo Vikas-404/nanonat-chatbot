@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"image/png"
 	"os"
+	"log"
 
 	openai "github.com/sashabaranov/go-openai"
 	"github.com/joho/godotenv"
@@ -23,7 +24,7 @@ func ImageRequest(imageDef string) string {
         log.Fatal("Error loading .env file")
     }
 
-    apiKey := os.Getenv(“API_KEY”)
+    apiKey := os.Getenv("API_KEY")
 
 	// Create a new client for the OpenAI API using the API key
 	client := openai.NewClient(apiKey)
